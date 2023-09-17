@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>Question Answer Chatbot</title>
+    <link rel="stylesheet" href="qa_styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Question Answer Chatbot</h1>
+
+      <!-- <label for="emailText">Enter Email:</label> -->
+      <textarea
+        id="questionText"
+        rows="10"
+        cols="50"
+        placeholder="Enter your question here"
+      ></textarea
+      ><br />
+      <button type="submit" onclick="myfunction()">Generate Answer</button>
+
+      <div id="responseDiv" class="response"></div>
+    </div>
+
+    <!-- Code injected by live-server -->
+    <script>
+      // <![CDATA[  <-- For SVG support
+      function myfunction() {
+        event.preventDefault();
+
+        const emailText = document.getElementById("questionText").value;
+        console.log("gfdsdfghkulio");
+        fetch(`http://127.0.0.1:8000/answer/${encodeURIComponent(emailText)}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const responseDiv = document.getElementById("responseDiv");
+            responseDiv.innerHTML = data.Answer;
+            console.log(data.Answer.Answer);
+          })
+          .catch((error) => {
+            const responseDiv = document.getElementById("responseDiv");
+            responseDiv.innerHTML = `<strong>Error:</strong> An error occurred while fetching the data.`;
+            console.error("Error:", error);
+          });
+      }
+      // ]]>
+    </script>
+  </body>
+</html>
